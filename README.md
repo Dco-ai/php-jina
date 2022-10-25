@@ -14,7 +14,7 @@ For more information about Jina go here: [Jina](https://docs.jina.ai)
 Add this to your `composer.json` file or create the file and put this in it.
 ```json
 {
-  "name":  "Dco-ai/php-jina",
+  "name":  "dco-ai/php-jina",
   "repositories": [
     {
       "type": "svn",
@@ -31,7 +31,7 @@ Add this to your `composer.json` file or create the file and put this in it.
 ```json
 {
   "require": {
-    "Dco-ai/php-jina": "1.0.*"
+    "dco-ai/php-jina": "1.0.*"
   }
 }
 ```
