@@ -1,0 +1,30 @@
+{
+  "name": "dco-ai/php-jina",
+  "version": "1.0.4",
+  "description": "Bolt protocol library over TCP socket",
+  "keywords": ["jina", "php", "neural network", "jina-ai"],
+  "homepage": "",
+  "type": "library",
+  "readme": "README.md",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Jonathan Rowley",
+      "role": "Developer",
+      "homepage": "https://www.linkedin.com/in/rowleyjonathan"
+    }
+  ],
+  "suggest": {
+    "jina-ai/jina": "Jina is a framework that empowers anyone to build cross-modal and multi-modal applications on the cloud."
+  },
+  "autoload": {
+    "psr-4": {
+      "DcoAi\\PhpJina\\": "src/"
+    }
+  },
+  "require": {
+    "ext-curl": "*",
+    "ext-json": "*"
+  }
+}
