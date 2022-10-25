@@ -1,12 +1,11 @@
 {
   "name": "dco-ai/php-jina",
-  "version": "1.0.4",
-  "description": "Bolt protocol library over TCP socket",
+  "version": "1.0.0",
+  "description": "A PHP Client for the Jina-ai framework.",
   "keywords": ["jina", "php", "neural network", "jina-ai"],
-  "homepage": "",
-  "type": "library",
+  "type": "composer-plugin",
   "readme": "README.md",
-  "license": "MIT",
+  "license": "Apache License Version 2.0",
   "minimum-stability": "stable",
   "authors": [
     {
