@@ -3,9 +3,14 @@ A tool to connect to Jina with PHP.
 ## Jina Documentation
 For more information about Jina go here: [Jina](https://docs.jina.ai)
 
+## Install with composer command
+```bash
+    composer require dco-ai/php-jina
+```
 
 ## Install using composer.json
 
+### from GitHub directly:
 Add this to your `composer.json` file or create the file and put this in it.
 ```json
 {
@@ -18,6 +23,15 @@ Add this to your `composer.json` file or create the file and put this in it.
   ],
   "require": {
     "Dco-ai/php-jina": "main"
+  }
+}
+```
+
+### or from Packagist:
+```json
+{
+  "require": {
+    "Dco-ai/php-jina": "1.0.*"
   }
 }
 ```
