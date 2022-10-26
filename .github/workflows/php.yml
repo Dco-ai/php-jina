@@ -28,6 +28,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: php-actions/composer@v6 # or alternative dependency management
-    - uses: php-actions/phpstan@v3
+    - name: PHPStan Static Analysis
+      uses: php-actions/phpstan@master
       with:
-        path: src/
+          path: src/
