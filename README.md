@@ -27,7 +27,7 @@ Add this to your `composer.json` file or create the file and put this in it.
     }
   ],
   "require": {
-    "Dco-ai/php-jina": "main"
+    "dco-ai/php-jina": "main"
   }
 }
 ```
@@ -36,7 +36,7 @@ Add this to your `composer.json` file or create the file and put this in it.
 ```json
 {
   "require": {
-    "dco-ai/php-jina": "1.0.*"
+    "dco-ai/php-jina": "v1.*"
   }
 }
 ```
@@ -49,9 +49,10 @@ This client needs to know a few things about your Jina project to make the conne
 The configuration is an associative array with 3 requirements:
 <table>
 <thead>
-<tr class="row-odd"><th class="head"><p>Attribute</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Description</p></th>
+<tr>
+<th><p>Attribute</p></th>
+<th><p>Type</p></th>
+<th><p>Description</p></th>
 </tr>
 </thead>
 
@@ -128,9 +129,10 @@ $jina->submit("/index",$da);
 
 <table>
 <thead>
-<tr class="row-odd"><th class="head"><p>Attribute</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Description</p></th>
+<tr>
+<th><p>Attribute</p></th>
+<th><p>Type</p></th>
+<th><p>Description</p></th>
 </tr>
 </thead>
 
@@ -210,7 +212,7 @@ $jina->submit("/index",$da);
 <tr>
 <td><p>location</p></td>
 <td><p>float</p></td>
-<td><p>the position of the doc, could be start and end index of a string; could be x,y (top, left) coordinate of an image crop; could be timestamp of an audio clip</p></td>
+<td><p>the position of the doc, could be start and end index of a string; could be x,y (top, left) coordinate of an image crop; could be the timestamp of an audio clip</p></td>
 </tr>
 
 <tr>
@@ -256,9 +258,10 @@ $jina->submit("/index",$da);
 
 <table>
 <thead>
-<tr class="row-odd"><th class="head"><p>Attribute</p></th>
-<th class="head"><p>Type</p></th>
-<th class="head"><p>Description</p></th>
+<tr>
+<th><p>Attribute</p></th>
+<th><p>Type</p></th>
+<th><p>Description</p></th>
 </tr>
 </thead>
 

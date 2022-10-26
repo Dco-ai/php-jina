@@ -24,6 +24,7 @@
   },
   "require": {
     "ext-curl": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "phpstan/phpstan": "1.8.*"
   }
 }

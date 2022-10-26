@@ -7,9 +7,8 @@ use stdClass;
 
 class ConnectJina
 {
-    private $data;
     private $url;
-    private $endpoints = [];
+    private $endpoints;
     public function __construct($conf) {
         $this->url = $conf["url"].":".$conf["port"];
         $this->endpoints = $conf["endpoints"];
@@ -22,10 +21,9 @@ class ConnectJina
      * @return mixed|stdClass|void
      */
     public function callAPI($endpoint, $da, $clean){
-        $this->data = $this->cleanDocArray($da);
+        $data = $this->cleanDocArray($da);
         $method = $this->endpoints[$endpoint];
         $url = $this->url.$endpoint;
-        $data = $this->data;
         $curl = curl_init();
         switch ($method){
             case "POST":
