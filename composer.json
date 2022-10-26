@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A PHP Client for the Jina-ai framework.",
   "keywords": ["jina", "php", "neural network", "jina-ai"],
-  "type": "composer-plugin",
+  "type": "library",
   "readme": "README.md",
   "license": "Apache-2.0",
   "minimum-stability": "stable",
