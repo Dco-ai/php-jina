@@ -1,6 +1,6 @@
 <?php
 
-namespace DcoAi\PhpJina\Connection;
+namespace DcoAi\PhpJina\connection;
 
 
 use stdClass;
@@ -14,7 +14,14 @@ class ConnectJina
         $this->url = $conf["url"].":".$conf["port"];
         $this->endpoints = $conf["endpoints"];
     }
-    public function callAPI($endpoint, $da){
+
+    /**
+     * @param $endpoint
+     * @param $da
+     * @param $clean
+     * @return mixed|stdClass|void
+     */
+    public function callAPI($endpoint, $da, $clean){
         $this->data = $this->cleanDocArray($da->documentArray);
         $method = $this->endpoints[$endpoint];
         $url = $this->url.$endpoint;
@@ -43,6 +50,10 @@ class ConnectJina
         $result = curl_exec($curl);
         if(!$result){die("Connection Failure");}
         curl_close($curl);
+
+        if ($clean) {
+            return $this->cleanDocArray(json_decode($result));
+        }
         return json_decode($result);
     }
     private function cleanDocArray($da): stdClass

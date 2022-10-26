@@ -25,9 +25,9 @@ class Document
         $this->document->location = null;
         $this->document->embedding = [];
         $this->document->modality = null;
-        $this->document->evaluations = null;
-        $this->document->scores = [];
-        $this->document->chunks = new stdClass();
-        $this->document->matches = new stdClass();
+        $this->document->evaluations = new stdClass();;
+        $this->document->scores = new stdClass();;
+        $this->document->chunks = [];
+        $this->document->matches = [];
     }
 }

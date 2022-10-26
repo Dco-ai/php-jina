@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 require "autoload.php";
 
-use DcoAi\PhpJina\Jina;
+use DcoAi\PhpJina\JinaClient;
 
 $config = [
     "url" => "localhost",
@@ -19,7 +19,7 @@ $config = [
         "/" => "GET"
     ]
 ];
-$jina = new Jina($config);
+$jina = new JinaClient($config);
 // initiate a DocumentArray
 $da = $jina->documentArray();
 

@@ -5,11 +5,11 @@ use DcoAi\PhpJina\structures\{
     Document,
     DocumentArray
 };
-use DcoAi\PhpJina\Connection\ConnectJina;
+use DcoAi\PhpJina\connection\ConnectJina;
 use stdClass;
 
 /**
- * This is the main class used to create Jina Documents and send them to your Jina service.
+ * This is the main class used to create JinaClient Documents and send them to your JinaClient service.
  *
  * Example usage:
  * $config = [
@@ -26,14 +26,14 @@ use stdClass;
  *      "/":"GET"
  *  ]
  * ];
- * $jinaConn = new Jina($config);
+ * $jinaConn = new JinaClient($config);
  *
  * @package     dco-ai/php-jina
  * @author      Jonathan Rowley
  * @access      public
- * @param       array $conf The configuration settings for your Jina Project
+ * @param       array $conf The configuration settings for your JinaClient Project
  */
-final class Jina
+final class JinaClient
 {
     private $conf;
     public function __construct($conf) {
@@ -72,14 +72,19 @@ final class Jina
     }
 
     /**
-     * Submits the DocumentArray to your Jina Project
+     * Submits the DocumentArray to your JinaClient Project
      *
-     * @param string $endpoint
-     * @param stdClass $da
+     * @param string $endpoint The endpoint to your Jina Application
+     * @param stdClass $da The DocumentArray you are sending to your Jina Application
+     * @param bool $clean (optional) Set to False if you want all values returned
      * @return mixed|void
      */
-    public function submit(string $endpoint, stdClass $da) {
+    public function submit(string $endpoint, stdClass $da, bool $clean=true) {
+        // if a Document was passed put it in a DocumentArray
+        if(!property_exists($da, "data") && property_exists($da, "id")){
+            $da = $this->addDocument($this->documentArray(), $da);
+        }
         $conn = new ConnectJina($this->conf);
-        return $conn->callAPI($endpoint, $da);
+        return $conn->callAPI($endpoint, $da, $clean);
     }
 }
