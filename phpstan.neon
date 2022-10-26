@@ -1,6 +1,0 @@
-parameters:
-    path:
-        - src/
-    excludePaths:
-        analyseAndScan:
-            - vendor/
