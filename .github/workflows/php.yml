@@ -30,4 +30,4 @@ jobs:
     - uses: php-actions/composer@v6 # or alternative dependency management
     - uses: php-actions/phpstan@v3
       with:
-        configuration: phpstan.neon
+        path: src/
