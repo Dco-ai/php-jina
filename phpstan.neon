@@ -1,4 +1,6 @@
 parameters:
-	excludePaths:
-	    analyseAndScan:
-	        - vendor/*
+    path:
+        - src/
+    excludePaths:
+        analyseAndScan:
+            - vendor/
