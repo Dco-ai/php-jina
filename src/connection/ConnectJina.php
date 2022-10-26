@@ -22,7 +22,7 @@ class ConnectJina
      * @return mixed|stdClass|void
      */
     public function callAPI($endpoint, $da, $clean){
-        $this->data = $this->cleanDocArray($da->documentArray);
+        $this->data = $this->cleanDocArray($da);
         $method = $this->endpoints[$endpoint];
         $url = $this->url.$endpoint;
         $data = $this->data;
@@ -56,22 +56,25 @@ class ConnectJina
         }
         return json_decode($result);
     }
-    private function cleanDocArray($da): stdClass
-    {
-        $newDa = new stdClass();
-        $newDa->parameters = $da->parameters;
-        $newDa->data = [];
-        foreach ($da->data as $document) {
-            $doc = new stdClass();
-            foreach ($document->document as $k => $v) {
-                $tmp = (array) $v;
-                if (!empty($v) && !empty($tmp)) {
-                    $doc->{$k} = $v;
+    private function array_filter_recursive($array) {
+        foreach ($array as $key => &$value) {
+            if (empty($value)) {
+                unset($array[$key]);
+            }
+            else {
+                if (is_array($value)) {
+                    $value = $this->array_filter_recursive($value);
+                    if (empty($value)) {
+                        unset($array[$key]);
+                    }
                 }
             }
-            $newDa->data[] = $doc;
         }
-        return $newDa;
+        return json_decode(json_encode($array));
+    }
+    private function cleanDocArray($da): stdClass
+    {
+        return $this->array_filter_recursive(json_decode(json_encode($da), true));
     }
 
 }
