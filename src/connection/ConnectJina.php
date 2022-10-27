@@ -22,7 +22,10 @@ class ConnectJina
      */
     public function callAPI($endpoint, $da, $clean){
         $data = $this->cleanDocArray($da);
-        $method = $this->endpoints[$endpoint];
+        $method = "GET";
+        if (array_key_exists($endpoint,$this->endpoints)) {
+            $method = $this->endpoints[$endpoint];
+        }
         $url = $this->url.$endpoint;
         $curl = curl_init();
         switch ($method){
@@ -49,20 +52,68 @@ class ConnectJina
         if(!$result){die("Connection Failure");}
         curl_close($curl);
 
+        $res = json_decode($result);
         if ($clean) {
-            return $this->cleanDocArray(json_decode($result));
+            $res = $this->cleanDocArray($res);
+            $res = $this->identifyChunks($res);
         }
-        return json_decode($result);
+        return $res;
+    }
+    private function iterateChunks($d) {
+        $newChunks = null;
+        // check if there is anything in chunks
+        if (is_object($d) && property_exists($d, "chunks") && !empty($d->chunks) ) {
+            // now see if there is _metadata->multi_modal_schema
+            if (property_exists($d, "_metadata") && property_exists($d->_metadata, "multi_modal_schema")) {
+                // We are looking for the data to tie to the chunks
+                foreach ($d->_metadata->multi_modal_schema as $class => $meta) {
+                    /*
+                     * if the key "position" exists then we know it's in the chunks else it is in the tags
+                     * These will be in the chunks as attribute_type:
+                     * 'document'
+                     * 'iterable_document'
+                     * 'nested'
+                     * 'iterable_nested'
+                    */
+                    if (property_exists($meta, "position")) {
+                        $newChunks[$class] = $d->chunks[$meta->position];
+                    }
+                }
+                $d->chunks = $newChunks;
+            }
+            // make sure to get all those nested chunks
+            foreach($d->chunks as $cls => $chunk) {
+                $d->chunks[$cls] = $this->iterateChunks($chunk);
+            }
+        }
+        return $d;
+    }
+    private function identifyChunks($da) {
+        foreach ($da->data as $k => $d) {
+            $da->data[$k] = $this->iterateChunks($d);
+        }
+        return $da;
+    }
+    private function is_it_empty_though($val): bool
+    {
+        if (is_null($val)) {
+            return true;
+        }
+        if (is_array($val) && sizeof($val) == 0) {
+            return true;
+        }
+        return false;
     }
     private function array_filter_recursive($array) {
+        $array = json_decode(json_encode($array), true);
         foreach ($array as $key => &$value) {
-            if (empty($value)) {
+            if ($this->is_it_empty_though($value)) {
                 unset($array[$key]);
             }
             else {
                 if (is_array($value)) {
                     $value = $this->array_filter_recursive($value);
-                    if (empty($value)) {
+                    if ($this->is_it_empty_though($value)) {
                         unset($array[$key]);
                     }
                 }
@@ -72,7 +123,7 @@ class ConnectJina
     }
     private function cleanDocArray($da): stdClass
     {
-        return $this->array_filter_recursive(json_decode(json_encode($da), true));
+        return $this->array_filter_recursive($da);
     }
 
 }
