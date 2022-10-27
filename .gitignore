@@ -2,3 +2,4 @@
 /composer.phar
 /vendor/
 /.idea/
+/php_errors.log
