@@ -24,7 +24,7 @@ $jina = new JinaClient($config);
 $da = $jina->documentArray();
 
 // add  a request parameter to the DocumentArray
-$da->parameters->asset_id = "ABCDE";
+$da->parameters->asset_id = "asset_id";
 
 // create a new Document and add text to it
 $d1 = $jina->document();
