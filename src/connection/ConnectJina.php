@@ -77,6 +77,7 @@ class ConnectJina
                     */
                     if (property_exists($meta, "position")) {
                         $newChunks[$class] = $d->chunks[$meta->position];
+                        $d->_metadata->multi_modal_schema->{$class}->position = 'chunks->'.$class;
                     }
                 }
                 $d->chunks = $newChunks;
