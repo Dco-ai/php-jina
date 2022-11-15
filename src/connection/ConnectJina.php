@@ -22,6 +22,7 @@ class ConnectJina
      */
     public function callAPI($endpoint, $da, $clean){
         $data = $this->cleanDocArray($da);
+        unset($da);
         $method = "GET";
         if (array_key_exists($endpoint,$this->endpoints)) {
             $method = $this->endpoints[$endpoint];
@@ -49,13 +50,20 @@ class ConnectJina
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
         // EXECUTE:
         $result = curl_exec($curl);
+        unset($data);
         if(!$result){die("Connection Failure");}
         curl_close($curl);
-
         $res = json_decode($result);
+        unset($result);
         if ($clean) {
-            $res = $this->cleanDocArray($res);
-            $res = $this->identifyChunks($res);
+            try {
+                $res = $this->cleanDocArray($res);
+                $res = $this->identifyChunks($res);
+            }
+            catch(\Exception $ex){
+                print_r($ex);
+                return $res;
+            }
         }
         return $res;
     }
@@ -81,6 +89,7 @@ class ConnectJina
                     }
                 }
                 $d->chunks = $newChunks;
+                unset($newChunks);
             }
             // make sure to get all those nested chunks
             foreach($d->chunks as $cls => $chunk) {
@@ -105,26 +114,20 @@ class ConnectJina
         }
         return false;
     }
-    private function array_filter_recursive($array) {
-        $array = json_decode(json_encode($array), true);
+    private function cleanDocArray($array) {
         foreach ($array as $key => &$value) {
             if ($this->is_it_empty_though($value)) {
-                unset($array[$key]);
+                unset($array->{$key});
             }
             else {
                 if (is_array($value)) {
-                    $value = $this->array_filter_recursive($value);
+                    $value = $this->cleanDocArray($value);
                     if ($this->is_it_empty_though($value)) {
-                        unset($array[$key]);
+                        unset($array->{$key});
                     }
                 }
             }
         }
-        return json_decode(json_encode($array));
+        return $array;
     }
-    private function cleanDocArray($da): stdClass
-    {
-        return $this->array_filter_recursive($da);
-    }
-
 }
