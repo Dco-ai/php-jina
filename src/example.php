@@ -16,8 +16,13 @@ $config = [
         "/search" => "POST",
         "/delete" => "DELETE",
         "/update" => "PUT",
-        "/" => "GET"
-    ]
+        "/" => "GET",
+    ],
+    //"dataStore" => [
+    //    "type" => "weaviate",
+    //    "url" => "localhost",
+    //    "port" => "8080",
+    //]
 ];
 $jina = new JinaClient($config);
 // initiate a DocumentArray
@@ -25,6 +30,23 @@ $da = $jina->documentArray();
 
 // add  a request parameter to the DocumentArray
 $da->parameters->asset_id = "asset_id";
+
+// lets add some filters as the request parameters
+// You can chain together as many filters as you want
+$filterFormatter = $jina->useFilterFormatter();
+$filterFormatter->
+    and()->
+        equal("env","dev")->
+        equal("userId","2")->
+    endAnd()->
+    or()->
+        notEqual("env","2")->
+        greaterThan("id","5")->
+    endOr()->
+    equal("env","dev")->
+    notEqual("env","prod");
+// Now set the filter on the DocumentArray as a parameter
+$da->parameters->filter = $filterFormatter->createFilter();
 
 // create a new Document and add text to it
 $d1 = $jina->document();
@@ -37,5 +59,9 @@ $d2 = $jina->document();
 $d2->text = "me!";
 $jina->addDocument($da, $d2);
 
-// Let's see the results
-print_r($da);
+// Let's see what the request looks like
+print_r(json_encode($da, JSON_PRETTY_PRINT));
+
+// Uncomment to submit the DocumentArray to Jina
+// $results = $jina->submit("/search",$da);
+// print_r($results);

@@ -1,6 +1,7 @@
 <?php
 namespace DcoAi\PhpJina;
 
+use DcoAi\PhpJina\DataStores\DataStoreFactory;
 use DcoAi\PhpJina\structures\{
     Document,
     DocumentArray
@@ -35,9 +36,11 @@ use stdClass;
  */
 final class JinaClient
 {
-    private $conf;
+    private array $conf;
+    private DataStoreFactory $dataStore;
     public function __construct($conf) {
         $this->conf = $conf;
+        $this->dataStore = new DataStoreFactory($conf);
     }
 
     /**
@@ -86,5 +89,14 @@ final class JinaClient
         }
         $conn = new ConnectJina($this->conf);
         return $conn->callAPI($endpoint, $da, $clean);
+    }
+
+    /**
+     * Returns the Filter class based on the configuration used
+     *
+     * @return mixed class
+     */
+    public function useFilterFormatter() {
+        return $this->dataStore->filter();
     }
 }

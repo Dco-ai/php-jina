@@ -6,10 +6,11 @@ use stdClass;
 
 class DocumentArray
 {
-    public $documentArray;
+    public stdClass $documentArray;
     function __construct() {
         $this->documentArray = new stdClass();
         $this->documentArray->data = [];
         $this->documentArray->parameters = new stdClass();
+        $this->documentArray->targetExecutor = '';
     }
 }

@@ -129,3 +129,67 @@ Stack trace:
 #0 E:\dco\websites\repo2\php-jina\src\example.php(33): DcoAi\PhpJina\Jina->addDocument()
 #1 {main}
   thrown in E:\dco\websites\repo2\php-jina\src\Jina.php on line 70
+[16-Feb-2023 22:35:43 UTC] PHP Fatal error:  Declaration of DcoAi\PhpJina\DataStores\Weaviate\Filter::filter(): array must be compatible with DcoAi\PhpJina\DataStores\Weaviate\WeaviateConnection::filter(): DcoAi\PhpJina\DataStores\Weaviate\Filter in E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php on line 281
+[16-Feb-2023 22:37:31 UTC] PHP Warning:  Attempt to read property "classes" on null in E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php on line 66
+[16-Feb-2023 22:37:31 UTC] PHP Fatal error:  Uncaught TypeError: DcoAi\PhpJina\DataStores\Weaviate\Filter::extractFilterDataTypes(): Argument #1 ($classes) must be of type array, null given, called in E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php on line 67 and defined in E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php:42
+Stack trace:
+#0 E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php(67): DcoAi\PhpJina\DataStores\Weaviate\Filter->extractFilterDataTypes()
+#1 E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php(12): DcoAi\PhpJina\DataStores\Weaviate\Filter->setFilterDataTypes()
+#2 E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\WeaviateConnection.php(27): DcoAi\PhpJina\DataStores\Weaviate\Filter->__construct()
+#3 E:\dco\websites\repo2\php-jina\src\DataStores\DataStoreFactory.php(47): DcoAi\PhpJina\DataStores\Weaviate\WeaviateConnection->filter()
+#4 E:\dco\websites\repo2\php-jina\src\JinaClient.php(95): DcoAi\PhpJina\DataStores\DataStoreFactory->filter()
+#5 E:\dco\websites\repo2\php-jina\src\example.php(35): DcoAi\PhpJina\JinaClient->useFilterFormatter()
+#6 {main}
+  thrown in E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php on line 42
+[16-Feb-2023 23:26:02 UTC] PHP Fatal error:  Uncaught RuntimeException: This Data Store is not yet supported. in E:\dco\websites\repo2\php-jina\src\DataStores\Redis\Filter.php:8
+Stack trace:
+#0 E:\dco\websites\repo2\php-jina\src\DataStores\Redis\RedisConnection.php(16): DcoAi\PhpJina\DataStores\Redis\Filter->__construct()
+#1 E:\dco\websites\repo2\php-jina\src\DataStores\DataStoreFactory.php(47): DcoAi\PhpJina\DataStores\Redis\RedisConnection->filter()
+#2 E:\dco\websites\repo2\php-jina\src\JinaClient.php(95): DcoAi\PhpJina\DataStores\DataStoreFactory->filter()
+#3 E:\dco\websites\repo2\php-jina\src\example.php(36): DcoAi\PhpJina\JinaClient->useFilterFormatter()
+#4 {main}
+  thrown in E:\dco\websites\repo2\php-jina\src\DataStores\Redis\Filter.php on line 8
+[16-Feb-2023 23:26:42 UTC] PHP Warning:  Attempt to read property "classes" on null in E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php on line 66
+[16-Feb-2023 23:26:42 UTC] PHP Fatal error:  Uncaught TypeError: DcoAi\PhpJina\DataStores\Weaviate\Filter::extractFilterDataTypes(): Argument #1 ($classes) must be of type array, null given, called in E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php on line 67 and defined in E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php:42
+Stack trace:
+#0 E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php(67): DcoAi\PhpJina\DataStores\Weaviate\Filter->extractFilterDataTypes()
+#1 E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php(12): DcoAi\PhpJina\DataStores\Weaviate\Filter->setFilterDataTypes()
+#2 E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\WeaviateConnection.php(27): DcoAi\PhpJina\DataStores\Weaviate\Filter->__construct()
+#3 E:\dco\websites\repo2\php-jina\src\DataStores\DataStoreFactory.php(47): DcoAi\PhpJina\DataStores\Weaviate\WeaviateConnection->filter()
+#4 E:\dco\websites\repo2\php-jina\src\JinaClient.php(95): DcoAi\PhpJina\DataStores\DataStoreFactory->filter()
+#5 E:\dco\websites\repo2\php-jina\src\example.php(36): DcoAi\PhpJina\JinaClient->useFilterFormatter()
+#6 {main}
+  thrown in E:\dco\websites\repo2\php-jina\src\DataStores\Weaviate\Filter.php on line 42
+[17-Feb-2023 15:40:23 UTC] PHP Fatal error:  Uncaught Error: Call to a member function filter() on null in E:\dco\websites\repo2\php-jina\src\DataStores\DataStoreFactory.php:48
+Stack trace:
+#0 E:\dco\websites\repo2\php-jina\src\JinaClient.php(95): DcoAi\PhpJina\DataStores\DataStoreFactory->filter()
+#1 E:\dco\websites\repo2\php-jina\src\example.php(36): DcoAi\PhpJina\JinaClient->useFilterFormatter()
+#2 {main}
+  thrown in E:\dco\websites\repo2\php-jina\src\DataStores\DataStoreFactory.php on line 48
+[17-Feb-2023 15:42:01 UTC] PHP Fatal error:  Uncaught Error: Call to a member function filter() on null in E:\dco\websites\repo2\php-jina\src\DataStores\DataStoreFactory.php:48
+Stack trace:
+#0 E:\dco\websites\repo2\php-jina\src\JinaClient.php(95): DcoAi\PhpJina\DataStores\DataStoreFactory->filter()
+#1 E:\dco\websites\repo2\php-jina\src\example.php(36): DcoAi\PhpJina\JinaClient->useFilterFormatter()
+#2 {main}
+  thrown in E:\dco\websites\repo2\php-jina\src\DataStores\DataStoreFactory.php on line 48
+[17-Feb-2023 15:43:07 UTC] PHP Fatal error:  Uncaught Error: Call to a member function filter() on null in E:\dco\websites\repo2\php-jina\src\DataStores\DataStoreFactory.php:48
+Stack trace:
+#0 E:\dco\websites\repo2\php-jina\src\JinaClient.php(95): DcoAi\PhpJina\DataStores\DataStoreFactory->filter()
+#1 E:\dco\websites\repo2\php-jina\src\example.php(36): DcoAi\PhpJina\JinaClient->useFilterFormatter()
+#2 {main}
+  thrown in E:\dco\websites\repo2\php-jina\src\DataStores\DataStoreFactory.php on line 48
+[17-Feb-2023 15:43:48 UTC] PHP Warning:  Undefined property: DcoAi\PhpJina\DataStores\Default\DefaultConnection::$conf in E:\dco\websites\repo2\php-jina\src\DataStores\Default\DefaultConnection.php on line 10
+[17-Feb-2023 15:43:48 UTC] PHP Fatal error:  Uncaught TypeError: DcoAi\PhpJina\DataStores\Default\Filter::notEqual(): Argument #1 ($field) must be of type string, array given, called in E:\dco\websites\repo2\php-jina\src\example.php on line 43 and defined in E:\dco\websites\repo2\php-jina\src\DataStores\Default\Filter.php:126
+Stack trace:
+#0 E:\dco\websites\repo2\php-jina\src\example.php(43): DcoAi\PhpJina\DataStores\Default\Filter->notEqual()
+#1 {main}
+  thrown in E:\dco\websites\repo2\php-jina\src\DataStores\Default\Filter.php on line 126
+[17-Feb-2023 15:44:06 UTC] PHP Warning:  Undefined property: DcoAi\PhpJina\DataStores\Default\DefaultConnection::$conf in E:\dco\websites\repo2\php-jina\src\DataStores\Default\DefaultConnection.php on line 10
+[17-Feb-2023 15:44:48 UTC] PHP Warning:  Undefined property: DcoAi\PhpJina\DataStores\Default\DefaultConnection::$conf in E:\dco\websites\repo2\php-jina\src\DataStores\Default\DefaultConnection.php on line 10
+[17-Feb-2023 15:45:35 UTC] PHP Warning:  Undefined property: DcoAi\PhpJina\DataStores\Default\DefaultConnection::$conf in E:\dco\websites\repo2\php-jina\src\DataStores\Default\DefaultConnection.php on line 10
+[17-Feb-2023 15:51:46 UTC] PHP Warning:  Undefined property: DcoAi\PhpJina\DataStores\Default\DefaultConnection::$conf in E:\dco\websites\repo2\php-jina\src\DataStores\Default\DefaultConnection.php on line 10
+[17-Feb-2023 15:54:54 UTC] PHP Warning:  Undefined property: DcoAi\PhpJina\DataStores\Default\DefaultConnection::$conf in E:\dco\websites\repo2\php-jina\src\DataStores\Default\DefaultConnection.php on line 10
+[17-Feb-2023 15:57:47 UTC] PHP Warning:  Undefined property: DcoAi\PhpJina\DataStores\Default\DefaultConnection::$conf in E:\dco\websites\repo2\php-jina\src\DataStores\Default\DefaultConnection.php on line 10
+[17-Feb-2023 16:05:30 UTC] PHP Warning:  Undefined property: DcoAi\PhpJina\DataStores\Default\DefaultConnection::$conf in E:\dco\websites\repo2\php-jina\src\DataStores\Default\DefaultConnection.php on line 10
+[17-Feb-2023 16:06:20 UTC] PHP Warning:  Undefined property: DcoAi\PhpJina\DataStores\Default\DefaultConnection::$conf in E:\dco\websites\repo2\php-jina\src\DataStores\Default\DefaultConnection.php on line 10
+[17-Feb-2023 16:07:13 UTC] PHP Warning:  Undefined property: DcoAi\PhpJina\DataStores\Default\DefaultConnection::$conf in E:\dco\websites\repo2\php-jina\src\DataStores\Default\DefaultConnection.php on line 10

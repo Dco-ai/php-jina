@@ -7,20 +7,20 @@ use stdClass;
 
 class ConnectJina
 {
-    private $url;
-    private $endpoints;
+    private string $url;
+    private array $endpoints;
     public function __construct($conf) {
         $this->url = $conf["url"].":".$conf["port"];
         $this->endpoints = $conf["endpoints"];
     }
 
     /**
-     * @param $endpoint
-     * @param $da
-     * @param $clean
+     * @param string $endpoint
+     * @param stdClass $da
+     * @param bool $clean
      * @return mixed|stdClass|void
      */
-    public function callAPI($endpoint, $da, $clean){
+    public function callAPI(string $endpoint, stdClass $da, bool $clean){
         $data = $this->cleanDocArray($da);
         unset($da);
         $method = "GET";
