@@ -1,6 +1,6 @@
 {
   "name": "dco-ai/php-jina",
-  "version": "v1.0.4",
+  "version": "v1.1.0",
   "description": "A PHP Client for the Jina-ai framework.",
   "keywords": ["jina", "php", "neural network", "jina-ai"],
   "type": "library",
