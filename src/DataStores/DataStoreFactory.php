@@ -32,12 +32,12 @@ class DataStoreFactory
 
         $this->connection = match ($dataStoreType) {
             'weaviate' => new WeaviateConnection($this->conf),
-            'qdrant' => new QdrantConnection($this->conf),
-            'redis' => new RedisConnection($this->conf),
-            'milvus' => new MilvusConnection($this->conf),
-            'elasticsearch' => new ElasticSearchConnection($this->conf),
+            'qdrant' => new QdrantConnection(),
+            'redis' => new RedisConnection(),
+            'milvus' => new MilvusConnection(),
+            'elasticsearch' => new ElasticSearchConnection(),
             'annlite' => new AnnLiteConnection(),
-            'sqlite' => new SQLiteConnection($this->conf),
+            'sqlite' => new SQLiteConnection(),
             default => new DefaultConnection(),
         };
     }
