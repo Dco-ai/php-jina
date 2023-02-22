@@ -533,7 +533,7 @@ $config = [
         "/update" => "PUT",
         "/" => "GET",
     ],
-    "dataStore" [
+    "dataStore" => [
         "type" => "annlite",
     ]
 ];
@@ -646,7 +646,7 @@ $config = [
         "/update" => "PUT",
         "/" => "GET",
     ],
-    "dataStore" [
+    "dataStore" => [
         "type" => "weaviate",
         "url" => "localhost",
         "port" => "8080",

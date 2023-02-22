@@ -9,7 +9,7 @@ use DcoAi\PhpJina\DataStores\ElasticSearch\ElasticSearchConnection;
 use DcoAi\PhpJina\DataStores\Milvus\MilvusConnection;
 use DcoAi\PhpJina\DataStores\Redis\RedisConnection;
 use DcoAi\PhpJina\DataStores\SQLite\SQLiteConnection;
-use DcoAi\PhpJina\DataStores\Default\DefaultConnection;
+use DcoAi\PhpJina\DataStores\DefaultDataStore\DefaultConnection;
 
 class DataStoreFactory
 {
@@ -19,27 +19,42 @@ class DataStoreFactory
     public function __construct($conf)
     {
         $this->conf = $conf;
-        $this->create($conf);
+        $this->create();
     }
-    public function create($config)
+    public function create()
     {
-        $this->conf = $config;
         if (!array_key_exists("dataStore", $this->conf)) {
             $this->connection = new DefaultConnection();
             return;
         }
         $dataStoreType = $this->conf["dataStore"]["type"];
 
-        $this->connection = match ($dataStoreType) {
-            'weaviate' => new WeaviateConnection($this->conf),
-            'qdrant' => new QdrantConnection(),
-            'redis' => new RedisConnection(),
-            'milvus' => new MilvusConnection(),
-            'elasticsearch' => new ElasticSearchConnection(),
-            'annlite' => new AnnLiteConnection(),
-            'sqlite' => new SQLiteConnection(),
-            default => new DefaultConnection(),
-        };
+        switch ($dataStoreType) {
+            case 'weaviate':
+                $this->connection = new WeaviateConnection($this->conf);
+                break;
+            case 'qdrant':
+                $this->connection = new QdrantConnection();
+                break;
+            case 'redis':
+                $this->connection = new RedisConnection();
+                break;
+            case 'milvus':
+                $this->connection = new MilvusConnection();
+                break;
+            case 'elasticsearch':
+                $this->connection = new ElasticSearchConnection();
+                break;
+            case 'annlite':
+                $this->connection = new AnnLiteConnection();
+                break;
+            case 'sqlite':
+                $this->connection = new SQLiteConnection();
+                break;
+            default:
+                $this->connection = new DefaultConnection();
+                break;
+        }
     }
 
     public function filter()

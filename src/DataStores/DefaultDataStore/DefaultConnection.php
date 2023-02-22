@@ -1,6 +1,6 @@
 <?php
 
-namespace DcoAi\PhpJina\DataStores\Default;
+namespace DcoAi\PhpJina\DataStores\DefaultDataStore;
 
 class DefaultConnection
 {
