@@ -58,7 +58,10 @@ class ConnectJina
         if ($clean) {
             try {
                 $res = $this->cleanDocArray($res);
-                $res = $this->identifyChunks($res);
+                if (property_exists($res, 'data') && isset($res->data)) {
+                    $res = $this->identifyChunks($res);
+                }
+
             }
             catch(\Exception $ex){
                 print_r($ex);
