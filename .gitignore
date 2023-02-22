@@ -3,3 +3,4 @@
 /vendor/
 /.idea/
 /php_errors.log
+src/php_errors.log
