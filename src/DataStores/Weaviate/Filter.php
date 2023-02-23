@@ -18,7 +18,7 @@ class Filter extends WeaviateConnection
      * @param string $class The name of the class to check.
      * @return bool True if the class should be excluded, false otherwise.
      */
-    private function isExcludedClass(string $class): bool
+    private function isExcludedClass(string $class)
     {
         $excludedSuffixes = [
             'subindexrc',
@@ -39,7 +39,7 @@ class Filter extends WeaviateConnection
      * @param array $classes The set of classes to extract filter data types from.
      * @return array An associative array of property names and their corresponding data types.
      */
-    private function extractFilterDataTypes(array $classes): array
+    private function extractFilterDataTypes(array $classes)
     {
         $filterDataTypes = [];
         foreach ($classes as $class) {
@@ -61,7 +61,7 @@ class Filter extends WeaviateConnection
      *
      * @return array An associative array of property names and their corresponding data types.
      */
-    private function setFilterDataTypes(): array
+    private function setFilterDataTypes()
     {
         $classes = $this->retrieveWeaviateSchema()->classes;
         return $this->extractFilterDataTypes($classes);
@@ -74,7 +74,7 @@ class Filter extends WeaviateConnection
      *
      * @return $this
      */
-    public function and(): static
+    public function and()
     {
         $this->andOrUsed = true;
         $this->query[] = [
@@ -89,7 +89,7 @@ class Filter extends WeaviateConnection
      *
      * @return $this
      */
-    public function endAnd(): static
+    public function endAnd()
     {
         $this->andOrUsed = false;
         return $this;
@@ -100,7 +100,7 @@ class Filter extends WeaviateConnection
      *
      * @return $this
      */
-    public function or(): static
+    public function or()
     {
         $this->andOrUsed = true;
         $this->query[] = [
@@ -116,7 +116,7 @@ class Filter extends WeaviateConnection
      *
      * @return $this
      */
-    public function endOr(): static
+    public function endOr()
     {
         $this->andOrUsed = false;
         return $this;
@@ -131,7 +131,7 @@ class Filter extends WeaviateConnection
      *
      * @return $this Returns the current instance of the Jina object for method chaining.
      */
-    private function setOperand(string $operator, array|string $path, mixed $value): static
+    private function setOperand(string $operator, array|string $path, mixed $value)
     {
         if (!is_string($path)) {
             $valueType = $this->filterDataTypes[end($path)] ?? 'valueString';
@@ -160,7 +160,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function not(array|string $path, mixed $value): static
+    public function not(array|string $path, mixed $value)
     {
         return $this->setOperand("Not", $path, $value);
     }
@@ -172,7 +172,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function equal(array|string $path, mixed $value): static
+    public function equal(array|string $path, mixed $value)
     {
         return $this->setOperand("Equal", $path, $value);
     }
@@ -184,7 +184,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function notEqual(array|string $path, mixed $value): static
+    public function notEqual(array|string $path, mixed $value)
     {
         return $this->setOperand("NotEqual", $path, $value);
     }
@@ -196,7 +196,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function greaterThan(array|string $path, mixed $value): static
+    public function greaterThan(array|string $path, mixed $value)
     {
         return $this->setOperand("GreaterThan", $path, $value);
     }
@@ -208,7 +208,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function greaterThanEqual(array|string $path, mixed $value): static
+    public function greaterThanEqual(array|string $path, mixed $value)
     {
         return $this->setOperand("GreaterThanEqual", $path, $value);
     }
@@ -220,7 +220,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function lessThan(array|string $path, mixed $value): static
+    public function lessThan(array|string $path, mixed $value)
     {
         return $this->setOperand("LessThan", $path, $value);
     }
@@ -232,7 +232,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function lessThanEqual(array|string $path, mixed $value): static
+    public function lessThanEqual(array|string $path, mixed $value)
     {
         return $this->setOperand("LessThanEqual", $path, $value);
     }
@@ -244,7 +244,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function like(array|string $path, mixed $value): static
+    public function like(array|string $path, mixed $value)
     {
         return $this->setOperand("Like", $path, $value);
     }
@@ -256,7 +256,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function withinGeoRange(array|string $path, mixed $value): static
+    public function withinGeoRange(array|string $path, mixed $value)
     {
         return $this->setOperand("WithinGeoRange", $path, $value);
     }
@@ -268,7 +268,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function isNull(array|string $path, mixed $value): static
+    public function isNull(array|string $path, mixed $value)
     {
         return $this->setOperand("IsNull", $path, $value);
     }
@@ -278,7 +278,7 @@ class Filter extends WeaviateConnection
      *
      * @return array
      */
-    public function createFilter(): array
+    public function createFilter()
     {
         return $this->query;
     }

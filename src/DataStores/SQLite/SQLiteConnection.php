@@ -4,7 +4,7 @@ namespace DcoAi\PhpJina\DataStores\SQLite;
 
 class SQLiteConnection
 {
-    public function filter(): Filter
+    public function filter()
     {
         return new Filter;
     }

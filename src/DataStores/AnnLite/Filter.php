@@ -13,7 +13,7 @@ class Filter
      *
      * @return $this
      */
-    public function and(): static
+    public function and()
     {
         $this->andUsed = true;
         $this->andQuery['$and'] = [];
@@ -25,7 +25,7 @@ class Filter
      *
      * @return $this
      */
-    public function endAnd(): static
+    public function endAnd()
     {
         $this->andUsed = false;
         $this->query[] = $this->andQuery;
@@ -40,7 +40,7 @@ class Filter
      *
      * @return $this
      */
-    public function or(): static
+    public function or()
     {
         $this->orUsed = true;
         $this->orQuery['$or'] = [];
@@ -53,7 +53,7 @@ class Filter
      *
      * @return $this
      */
-    public function endOr(): static
+    public function endOr()
     {
         $this->orUsed = false;
         $this->query[] = $this->orQuery;
@@ -69,7 +69,7 @@ class Filter
      * @param mixed $value The value to compare the field against.
      * @return static
      */
-    private function setOperand(string $operator, string $field, mixed $value): static
+    private function setOperand(string $operator, string $field, mixed $value)
     {
         $query = [$field => [$operator => $value]];
         if ($this->andUsed) {
@@ -90,7 +90,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function equal(string $field, mixed $value): static
+    public function equal(string $field, mixed $value)
     {
         return $this->setOperand('$eq', $field, $value);
     }
@@ -103,7 +103,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function notEqual(string $field, mixed $value): static
+    public function notEqual(string $field, mixed $value)
     {
         return $this->setOperand('$ne', $field, $value);
     }
@@ -116,7 +116,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function greaterThan(string $field, int|float $value): static
+    public function greaterThan(string $field, int|float $value)
     {
         return $this->setOperand('$gt', $field, $value);
     }
@@ -129,7 +129,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function greaterThanEqual(string $field, int|float $value): static
+    public function greaterThanEqual(string $field, int|float $value)
     {
         return $this->setOperand('$gte', $field, $value);
     }
@@ -142,7 +142,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function lessThan(string $field, int|float $value): static
+    public function lessThan(string $field, int|float $value)
     {
         return $this->setOperand('$lt', $field, $value);
     }
@@ -155,7 +155,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function lessThanEqual(string $field, int|float $value): static
+    public function lessThanEqual(string $field, int|float $value)
     {
         return $this->setOperand('$lte', $field, $value);
     }
@@ -168,7 +168,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function in(string $field, array $value): static
+    public function in(string $field, array $value)
     {
         return $this->setOperand('$in', $field, $value);
     }
@@ -181,7 +181,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function notIn(string $field, array $value): static
+    public function notIn(string $field, array $value)
     {
         return $this->setOperand('$nin', $field, $value);
     }
@@ -191,7 +191,7 @@ class Filter
      *
      * @return array
      */
-    public function createFilter(): array
+    public function createFilter()
     {
         return $this->query;
     }

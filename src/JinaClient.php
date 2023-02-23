@@ -46,7 +46,7 @@ final class JinaClient
     /**
      * @return stdClass
      */
-    public function documentArray(): stdClass
+    public function documentArray()
     {
         $docArr =  new DocumentArray;
         return $docArr->documentArray;
@@ -55,7 +55,7 @@ final class JinaClient
     /**
      * @return stdClass
      */
-    public function document(): stdClass
+    public function document()
     {
         $doc =  new Document;
         return $doc->document;
@@ -68,7 +68,7 @@ final class JinaClient
      * @param stdClass $d
      * @return stdClass
      */
-    public function addDocument(stdClass $da, stdClass $d): stdClass
+    public function addDocument(stdClass $da, stdClass $d)
     {
         $da->data[] = $d;
         return $da;

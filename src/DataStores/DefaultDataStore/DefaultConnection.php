@@ -5,7 +5,7 @@ namespace DcoAi\PhpJina\DataStores\DefaultDataStore;
 class DefaultConnection
 {
 
-    public function filter(): Filter
+    public function filter()
     {
         return new Filter();
     }

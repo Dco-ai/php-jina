@@ -12,7 +12,7 @@ class Http
      * @param mixed|null $data Optional data payload to include in the request.
      * @return mixed The response from the server, decoded as a JSON object.
      */
-    public static function makeCurlRequest(string $url, string $method='GET', mixed $data = null): mixed
+    public static function makeCurlRequest(string $url, string $method='GET', mixed $data = null)
     {
         $headers = [
             'Content-Type: application/json'

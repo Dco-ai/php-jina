@@ -4,7 +4,7 @@ namespace DcoAi\PhpJina\DataStores\ElasticSearch;
 
 class ElasticSearchConnection
 {
-    public function filter(): Filter
+    public function filter()
     {
         return new Filter;
     }

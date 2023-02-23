@@ -16,13 +16,13 @@ class WeaviateConnection
      *
      * @return mixed The schema from the Weaviate API, decoded as a JSON object.
      */
-    public function retrieveWeaviateSchema(): mixed
+    public function retrieveWeaviateSchema()
     {
         $path = "/v1/schema";
         return Http::makeCurlRequest($this->conf["dataStore"]["url"].":".$this->conf["dataStore"]["port"].$path);
     }
 
-    public function filter(): Filter
+    public function filter()
     {
         return new Filter($this->conf);
     }
