@@ -131,7 +131,7 @@ class Filter extends WeaviateConnection
      *
      * @return $this Returns the current instance of the Jina object for method chaining.
      */
-    private function setOperand(string $operator, array|string $path, mixed $value)
+    private function setOperand(string $operator, $path, $value)
     {
         if (!is_string($path)) {
             $valueType = $this->filterDataTypes[end($path)] ?? 'valueString';
@@ -160,7 +160,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function not(array|string $path, mixed $value)
+    public function not($path, $value)
     {
         return $this->setOperand("Not", $path, $value);
     }
@@ -172,7 +172,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function equal(array|string $path, mixed $value)
+    public function equal($path, $value)
     {
         return $this->setOperand("Equal", $path, $value);
     }
@@ -184,7 +184,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function notEqual(array|string $path, mixed $value)
+    public function notEqual($path, $value)
     {
         return $this->setOperand("NotEqual", $path, $value);
     }
@@ -196,7 +196,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function greaterThan(array|string $path, mixed $value)
+    public function greaterThan($path, $value)
     {
         return $this->setOperand("GreaterThan", $path, $value);
     }
@@ -208,7 +208,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function greaterThanEqual(array|string $path, mixed $value)
+    public function greaterThanEqual($path, $value)
     {
         return $this->setOperand("GreaterThanEqual", $path, $value);
     }
@@ -220,7 +220,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function lessThan(array|string $path, mixed $value)
+    public function lessThan($path, $value)
     {
         return $this->setOperand("LessThan", $path, $value);
     }
@@ -232,7 +232,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function lessThanEqual(array|string $path, mixed $value)
+    public function lessThanEqual($path, $value)
     {
         return $this->setOperand("LessThanEqual", $path, $value);
     }
@@ -244,7 +244,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function like(array|string $path, mixed $value)
+    public function like($path, $value)
     {
         return $this->setOperand("Like", $path, $value);
     }
@@ -256,7 +256,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function withinGeoRange(array|string $path, mixed $value)
+    public function withinGeoRange($path, $value)
     {
         return $this->setOperand("WithinGeoRange", $path, $value);
     }
@@ -268,7 +268,7 @@ class Filter extends WeaviateConnection
      * @param mixed $value
      * @return $this
      */
-    public function isNull(array|string $path, mixed $value)
+    public function isNull($path, $value)
     {
         return $this->setOperand("IsNull", $path, $value);
     }

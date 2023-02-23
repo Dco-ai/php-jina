@@ -69,7 +69,7 @@ class Filter
      * @param mixed $value The value to compare the field against.
      * @return static
      */
-    private function setOperand(string $operator, string $field, mixed $value)
+    private function setOperand(string $operator, string $field, $value)
     {
         $query = [$field => [$operator => $value]];
         if ($this->andUsed) {
@@ -90,7 +90,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function equal(string $field, mixed $value)
+    public function equal(string $field, $value)
     {
         return $this->setOperand('$eq', $field, $value);
     }
@@ -103,7 +103,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function notEqual(string $field, mixed $value)
+    public function notEqual(string $field, $value)
     {
         return $this->setOperand('$ne', $field, $value);
     }
@@ -116,7 +116,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function greaterThan(string $field, int|float $value)
+    public function greaterThan(string $field, $value)
     {
         return $this->setOperand('$gt', $field, $value);
     }
@@ -129,7 +129,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function greaterThanEqual(string $field, int|float $value)
+    public function greaterThanEqual(string $field, $value)
     {
         return $this->setOperand('$gte', $field, $value);
     }
@@ -142,7 +142,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function lessThan(string $field, int|float $value)
+    public function lessThan(string $field, $value)
     {
         return $this->setOperand('$lt', $field, $value);
     }
@@ -155,7 +155,7 @@ class Filter
      *
      * @return static Returns an instance of the class for method chaining.
      */
-    public function lessThanEqual(string $field, int|float $value)
+    public function lessThanEqual(string $field, $value)
     {
         return $this->setOperand('$lte', $field, $value);
     }
