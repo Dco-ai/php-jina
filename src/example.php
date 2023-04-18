@@ -7,7 +7,7 @@ require "autoload.php";
 use DcoAi\PhpJina\JinaClient;
 
 $config = [
-    "url" => "localhost",
+    "url" => "http://jina.dco.ai",
     "port" => "1234",
     "endpoints" => [
         "/status" => "GET",
@@ -18,11 +18,11 @@ $config = [
         "/update" => "PUT",
         "/" => "GET",
     ],
-    //"dataStore" => [
-    //    "type" => "weaviate",
-    //    "url" => "localhost",
-    //    "port" => "8080",
-    //]
+    "dataStore" => [
+        "type" => "weaviate",
+        "url" => "http://weaviate.dco.ai",
+        "port" => "80",
+    ]
 ];
 $jina = new JinaClient($config);
 // initiate a DocumentArray
@@ -31,7 +31,7 @@ $da = $jina->documentArray();
 // add  a request parameter to the DocumentArray
 $da->parameters->asset_id = "asset_id";
 
-// lets add some filters as the request parameters
+// let's add some filters as the request parameters
 // You can chain together as many filters as you want
 $filterFormatter = $jina->useFilterFormatter();
 $filterFormatter->

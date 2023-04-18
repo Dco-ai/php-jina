@@ -9,8 +9,10 @@ class ConnectJina
 {
     private string $url;
     private array $endpoints;
-    public function __construct($conf) {
-        $this->url = $conf["url"].":".$conf["port"];
+
+    public function __construct($conf)
+    {
+        $this->url = $conf["url"] . ":" . $conf["port"];
         $this->endpoints = $conf["endpoints"];
     }
 
@@ -20,16 +22,17 @@ class ConnectJina
      * @param bool $clean
      * @return mixed|stdClass|void
      */
-    public function callAPI(string $endpoint, stdClass $da, bool $clean){
+    public function callAPI(string $endpoint, stdClass $da, bool $clean)
+    {
         $data = $this->cleanDocArray($da);
         unset($da);
         $method = "GET";
-        if (array_key_exists($endpoint,$this->endpoints)) {
+        if (array_key_exists($endpoint, $this->endpoints)) {
             $method = $this->endpoints[$endpoint];
         }
-        $url = $this->url.$endpoint;
+        $url = $this->url . $endpoint;
         $curl = curl_init();
-        switch ($method){
+        switch ($method) {
             case "POST":
                 curl_setopt($curl, CURLOPT_POST, 1);
                 curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
@@ -51,7 +54,10 @@ class ConnectJina
         // EXECUTE:
         $result = curl_exec($curl);
         unset($data);
-        if(!$result){die("Connection Failure");}
+        if (!$result) {
+            return $result;
+            //die("Connection Failure");
+        }
         curl_close($curl);
         $res = json_decode($result);
         unset($result);
@@ -62,18 +68,19 @@ class ConnectJina
                     $res = $this->identifyChunks($res);
                 }
 
-            }
-            catch(\Exception $ex){
+            } catch (\Exception $ex) {
                 print_r($ex);
                 return $res;
             }
         }
         return $res;
     }
-    private function iterateChunks($d) {
+
+    private function iterateChunks($d)
+    {
         $newChunks = null;
         // check if there is anything in chunks
-        if (is_object($d) && property_exists($d, "chunks") && !empty($d->chunks) ) {
+        if (is_object($d) && property_exists($d, "chunks") && !empty($d->chunks)) {
             // now see if there is _metadata->multi_modal_schema
             if (property_exists($d, "_metadata") && property_exists($d->_metadata, "multi_modal_schema")) {
                 // We are looking for the data to tie to the chunks
@@ -88,25 +95,28 @@ class ConnectJina
                     */
                     if (property_exists($meta, "position")) {
                         $newChunks[$class] = $d->chunks[$meta->position];
-                        $d->_metadata->multi_modal_schema->{$class}->position = 'chunks->'.$class;
+                        $d->_metadata->multi_modal_schema->{$class}->position = 'chunks->' . $class;
                     }
                 }
                 $d->chunks = $newChunks;
                 unset($newChunks);
             }
             // make sure to get all those nested chunks
-            foreach($d->chunks as $cls => $chunk) {
+            foreach ($d->chunks as $cls => $chunk) {
                 $d->chunks[$cls] = $this->iterateChunks($chunk);
             }
         }
         return $d;
     }
-    private function identifyChunks($da) {
+
+    private function identifyChunks($da)
+    {
         foreach ($da->data as $k => $d) {
             $da->data[$k] = $this->iterateChunks($d);
         }
         return $da;
     }
+
     private function is_it_empty_though($val): bool
     {
         if (is_null($val)) {
@@ -117,12 +127,13 @@ class ConnectJina
         }
         return false;
     }
-    private function cleanDocArray($array) {
+
+    private function cleanDocArray($array)
+    {
         foreach ($array as $key => &$value) {
             if ($this->is_it_empty_though($value)) {
                 unset($array->{$key});
-            }
-            else {
+            } else {
                 if (is_array($value)) {
                     $value = $this->cleanDocArray($value);
                     if ($this->is_it_empty_though($value)) {
